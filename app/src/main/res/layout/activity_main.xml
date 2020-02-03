@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
-        android:layout_width="371dp"
-        android:layout_height="162dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.073"></LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:layout_width="371dp"-->
+<!--        android:layout_height="162dp"-->
+<!--        android:orientation="vertical"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.073"></LinearLayout>-->
 
 
     <TextView
@@ -28,6 +28,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.022" />
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:drawSelectorOnTop="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.067"
+        tools:context="com.manalilatkar.android.dime" />
 
     <LinearLayout
         android:layout_width="164dp"
@@ -103,14 +116,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="What do you call it?"></EditText>
+            android:hint="What do you call it?"></EditText>
 
         <EditText
             android:id="@+id/edit_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Where is this thing?" />
+            android:hint="Where is this thing?" />
 
         <!-- Breed field -->
         <EditText
@@ -118,7 +131,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Describe it" />
+            android:hint="Describe it" />
 
         <EditText
             android:id="@+id/edit_attr2"
@@ -126,15 +139,15 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:text="Describe it" />
+            android:hint="Describe it" />
 
         <EditText
-            android:id="@+id/editattr3"
+            android:id="@+id/edit_attr3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:text="Describe it" />
+            android:hint="Describe it" />
 
         <EditText
             android:id="@+id/edit_attr4"
@@ -142,7 +155,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:text="Describe it" />
+            android:hint="Describe it" />
 
 
     </LinearLayout>

@@ -3,15 +3,21 @@ package com.manalilatkar.android.dime;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.manalilatkar.android.dime.data.Item;
 import com.manalilatkar.android.dime.data.ItemContract;
 import com.manalilatkar.android.dime.data.ItemDbHelper;
+
+import java.util.ArrayList;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,6 +25,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final ArrayList<Item> containers = new ArrayList<Item>();
+        ItemDbHelper dbHelper = new ItemDbHelper(this);
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query(ItemContract.ItemEntry.TABLE_NAME,
+                new String[] {ItemContract.ItemEntry.COLUMN_ITEM_NAME,
+                ItemContract.ItemEntry.COLUMN_LOCATION, ItemContract.ItemEntry.COLUMN_ATTR1,
+                ItemContract.ItemEntry.COLUMN_ATTR2},
+//                ItemContract.ItemEntry.COLUMN_IS_CONTAINER+" = ?",
+//                new String[] {"true"},
+                null, null,null,null,null,null);
+        ArrayList<Item> itemList = Item.getContainerList(cursor);
+
+        ContainerAdapter adapter = new ContainerAdapter(this, itemList, 0);
+
+        ListView listView = (ListView) findViewById(R.id.list);
+
+
+
+        listView.setAdapter(adapter);
+
 
         Button saveButton = (Button) findViewById(R.id.saveItemButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -35,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         EditText mNameEditText = (EditText) findViewById(R.id.edit_name);
-        EditText locationEditText = (EditText) findViewById(R.id.edit_name);
-        EditText attr1EditText = (EditText) findViewById(R.id.edit_name);
-        EditText attr2EditText = (EditText) findViewById(R.id.edit_name);
-        EditText attr3EditText = (EditText) findViewById(R.id.edit_name);
-        EditText attr4EditText = (EditText) findViewById(R.id.edit_name);
+        EditText locationEditText = (EditText) findViewById(R.id.edit_location);
+        EditText attr1EditText = (EditText) findViewById(R.id.edit_attr1);
+        EditText attr2EditText = (EditText) findViewById(R.id.edit_attr2);
+        EditText attr3EditText = (EditText) findViewById(R.id.edit_attr3);
+        EditText attr4EditText = (EditText) findViewById(R.id.edit_attr4);
         boolean isContainer = findViewById(R.id.checkBox).isSelected();
 
         String nameString = mNameEditText.getText().toString().trim();
