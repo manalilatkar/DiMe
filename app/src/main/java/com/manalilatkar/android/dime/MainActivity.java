@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
+    CheckBox isContainerCheckbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,10 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = db.query(ItemContract.ItemEntry.TABLE_NAME,
                 new String[] {ItemContract.ItemEntry.COLUMN_ITEM_NAME,
                 ItemContract.ItemEntry.COLUMN_LOCATION, ItemContract.ItemEntry.COLUMN_ATTR1,
-                ItemContract.ItemEntry.COLUMN_ATTR2},
-//                ItemContract.ItemEntry.COLUMN_IS_CONTAINER+" = ?",
-//                new String[] {"true"},
-                null, null,null,null,null,null);
+                ItemContract.ItemEntry.COLUMN_IS_CONTAINER},
+                ItemContract.ItemEntry.COLUMN_IS_CONTAINER+" = ?",
+                new String[] {"1"},
+                 null,null,null,null);
         ArrayList<Item> itemList = Item.getContainerList(cursor);
 
         ContainerAdapter adapter = new ContainerAdapter(this, itemList, 0);
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         EditText attr2EditText = (EditText) findViewById(R.id.edit_attr2);
         EditText attr3EditText = (EditText) findViewById(R.id.edit_attr3);
         EditText attr4EditText = (EditText) findViewById(R.id.edit_attr4);
-        boolean isContainer = findViewById(R.id.checkBox).isSelected();
+        isContainerCheckbox = (CheckBox) findViewById(R.id.checkBox);
 
         String nameString = mNameEditText.getText().toString().trim();
         String location = locationEditText.getText().toString().trim();
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         cv.put(ItemContract.ItemEntry.COLUMN_ATTR2, attr2);
         cv.put(ItemContract.ItemEntry.COLUMN_ATTR3, attr3);
         cv.put(ItemContract.ItemEntry.COLUMN_ATTR4, attr4);
-        cv.put(ItemContract.ItemEntry.COLUMN_IS_CONTAINER, isContainer);
+        cv.put(ItemContract.ItemEntry.COLUMN_IS_CONTAINER, isContainerCheckbox.isChecked());
 
         long id = db.insert(ItemContract.ItemEntry.TABLE_NAME, null, cv);
 
