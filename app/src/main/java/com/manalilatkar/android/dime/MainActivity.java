@@ -1,6 +1,7 @@
 package com.manalilatkar.android.dime;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
         ContainerAdapter adapter = new ContainerAdapter(this, itemList, 0);
 
-        ListView listView = (ListView) findViewById(R.id.list);
-
+        GridView listView = (GridView) findViewById(R.id.list);
+        listView.setNumColumns(itemList.size());
 
 
         listView.setAdapter(adapter);
